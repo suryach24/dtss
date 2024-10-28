@@ -1,115 +1,70 @@
-# Devathilakula Address Book
+# Getting Started with Create React App
 
-Welcome to the Devathilakula Address Book repository! This project is an address book application specifically designed for the Devathilakula community living in Hyderabad. It allows users to manage contact information efficiently.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Table of Contents
+## Available Scripts
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+In the project directory, you can run:
 
-## Introduction
+### `npm start`
 
-The Devathilakula Address Book is a web application that helps members of the Devathilakula community in Hyderabad to store and manage contact information. It provides a user-friendly interface to add, edit, and delete contacts.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Features
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-- Add new contacts with details such as name, surname, area, address, mobile, email, phone, and organization.
-- Edit existing contact information.
-- Delete contacts.
-- View a list of all contacts.
-- Responsive design for use on various devices.
+### `npm test`
 
-## Installation
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-To get a local copy up and running, follow these steps:
+### `npm run build`
 
-### Prerequisites
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-- Node.js and npm installed on your machine.
-- MongoDB instance (local or cloud-based).
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### Backend Setup
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/devathilakula-address-book.git
-   cd devathilakula-address-book/backend
-   ```
+### `npm run eject`
 
-2. Install backend dependencies:
-   ```sh
-   npm install
-   ```
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-3. Create a .env file in the backend directory and add your MongoDB connection string:
-   ```env
-   MONGO_URI=your_mongodb_connection_string
-   ```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-4. Start the backend server:
-   ```sh
-   npm start
-   ```
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-### Frontend Setup
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-1. Navigate to the frontend directory:
-   ```sh
-   cd ../frontend
-   ```
+## Learn More
 
-2. Install frontend dependencies:
-   ```sh
-   npm install
-   ```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-3. Start the frontend development server:
-   ```sh
-   npm start
-   ```
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Usage
+### Code Splitting
 
-Once the servers are running, you can access the application in your web browser at http://localhost:3000. Use the interface to add, edit, and delete contacts.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-## Technologies Used
+### Analyzing the Bundle Size
 
-- **Frontend**:
-    - React
-    - Axios
-    - Bootstrap
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-- **Backend**:
-    - Node.js
-    - Express
-    - MongoDB
-    - Mongoose
+### Making a Progressive Web App
 
-## Contributing
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-Contributions are welcome! Please follow these steps to contribute:
+### Advanced Configuration
 
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature/YourFeature).
-3. Commit your changes (git commit -m 'Add some feature').
-4. Push to the branch (git push origin feature/YourFeature).
-5. Open a pull request.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-## License
+### Deployment
 
-This project is noy licensed under the MIT License. See the LICENSE file for details.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-## Contact
+### `npm run build` fails to minify
 
-For any questions or suggestions, please contact:
-
-- Name: Surya Chandra Kukunuri
-- Email: sckukunuri2020@gmail.com
-
-Thank you for visiting the Devathilakula Address Book repository!
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
