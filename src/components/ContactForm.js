@@ -52,12 +52,31 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
   // Validate form inputs
   const validate = () => {
     const newErrors = {};
-    if (!contact.surname) newErrors.surname = 'Surname is required';
-    if (!contact.name) newErrors.name = 'Name is required';
-    if (!contact.area) newErrors.area = 'Area is required';
-    if (!contact.address) newErrors.address = 'Address is required';
-    if (!contact.mobile) newErrors.mobile = 'Mobile is required';
-    // Add more validation rules as needed
+    if (!contact.surname.trim()) newErrors.surname = 'Surname is required';
+    if (!contact.name.trim()) newErrors.name = 'Name is required';
+    if (!contact.area.trim()) newErrors.area = 'Area is required';
+    if (!contact.address.trim()) newErrors.address = 'Address is required';
+    if (!contact.mobile.trim()) newErrors.mobile = 'Primary contact is required';
+    else if (!/^\d{10}$/.test(contact.mobile)) newErrors.mobile = 'Primary contact must be 10 digits';
+
+    // Optional fields validation
+    // Email validation if provided
+    if (contact.email && contact.email.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(contact.email)) {
+        newErrors.email = 'Invalid email format';
+      }
+    }
+
+    // Secondary contact validation if provided
+    if (contact.phone && contact.phone.trim()) {
+      if (!/^\d{10}$/.test(contact.phone)) {
+        newErrors.phone = 'Secondary contact must be 10 digits';
+      }
+    }
+
+    // No validation for organisation as it's optional and has no specific format
+
     return newErrors;
   };
 
@@ -93,15 +112,15 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
   };
 
   return (
-<div className="card mb-3">
+    <div className="card mb-3">
       <div className="card-header">{contactId ? 'Edit Contact' : 'Add Contact'}</div>
       <div className="card-body">
         {errors.form && <div className="alert alert-danger">{errors.form}</div>}
         <form onSubmit={handleSubmit}>
           {/* Row 1: Surname and Name */}
           <div className="form-row">
-            <div className="form-group col-md-6">
-              <label>Please enter the Surname</label>
+            <div className="form-group col-md-4">
+              <label>Please enter your Surname</label>
               <input
                 type="text"
                 name="surname"
@@ -111,8 +130,8 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
               />
               {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
             </div>
-            <div className="form-group col-md-6">
-              <label>Enter your First and Last names</label>
+            <div className="form-group col-md-8">
+              <label>Enter your remaining Name</label>
               <input
                 type="text"
                 name="name"
@@ -138,7 +157,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
               {errors.area && <div className="invalid-feedback">{errors.area}</div>}
             </div>
             <div className="form-group col-md-4">
-              <label>Primary Contact Number</label>
+              <label>Primary Contact</label>
               <input
                 type="text"
                 name="mobile"
@@ -149,13 +168,14 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
               {errors.mobile && <div className="invalid-feedback">{errors.mobile}</div>}
             </div>
             <div className="form-group col-md-4">
-              <label>Secondary Contact</label>
+              <label>Secondary Contact (optional)</label>
               <input
                 type="text"
                 name="phone"
                 value={contact.phone}
                 onChange={handleChange}
                 className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
+                placeholder="Enter secondary contact (optional)"
               />
               {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
             </div>
@@ -163,7 +183,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
 
           {/* Row 3: Address */}
           <div className="form-group">
-            <label>Enter your full Address</label>
+            <label>Enter your Full Address</label>
             <input
               type="text"
               name="address"
@@ -177,26 +197,27 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
           {/* Row 4: Email and Organisation */}
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label>Please enter your full email</label>
+              <label>Email (optional)</label>
               <input
                 type="email"
                 name="email"
                 value={contact.email}
                 onChange={handleChange}
                 className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                placeholder="Enter email (optional)"
               />
               {errors.email && <div className="invalid-feedback">{errors.email}</div>}
             </div>
             <div className="form-group col-md-6">
-              <label>Company/Organisation</label>
+              <label>Occupation/Organisation/Company (optional)</label>
               <input
                 type="text"
                 name="organisation"
                 value={contact.organisation}
                 onChange={handleChange}
-                className={`form-control ${errors.organisation ? 'is-invalid' : ''}`}
+                className="form-control"
+                placeholder="Enter organisation (optional)"
               />
-              {errors.organisation && <div className="invalid-feedback">{errors.organisation}</div>}
             </div>
           </div>
 
