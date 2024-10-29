@@ -142,22 +142,24 @@ const ContactList = () => {
                       <td>{contact.mobile}</td>
                       <td>{contact.email}</td>
                       <td>
+                        <div className="d-flex align-items-center">
                         <button
-                          className="btn btn-outline-dark btn-sm me-1"
+                          className="btn btn-outline-dark btn-sm"
                           onClick={() => handleEdit(contact)}
                           title="Edit"
                           aria-label="Edit"
                         >
-                          <i class="fa-solid fa-pen"></i>
+                          <i className="fa-solid fa-pen"></i>
                         </button>
                         <button
-                          className="btn btn-outline-dark btn-sm me-1"
+                          className="btn btn-outline-dark btn-sm"
                           onClick={() => handleDelete(contact._id)}
                           title="Delete"
                           aria-label="Delete"
                         >
-                          <i class="fa-solid fa-trash"></i>
+                          <i className="fa-solid fa-trash"></i>
                         </button>
+                        </div>
                       </td>
                     </tr>
                   ))}

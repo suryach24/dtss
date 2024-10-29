@@ -209,7 +209,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
                 value={contact.email}
                 onChange={handleChange}
                 className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                placeholder="Enter your email address"
+                placeholder="Enter your email address (optional)"
               />
               {errors.email && <div className="invalid-feedback">{errors.email}</div>}
             </div>
