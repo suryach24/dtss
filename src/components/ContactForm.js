@@ -195,7 +195,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
             {errors.organisation && <div className="invalid-feedback">{errors.organisation}</div>}
           </div>
           {/* Buttons */}
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-dark">
             {contactId ? 'Update Contact' : 'Add Contact'}
           </button>
           <button type="button" className="btn btn-secondary ml-2" onClick={onCancel}>

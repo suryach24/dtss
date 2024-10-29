@@ -84,16 +84,16 @@ const ContactList = () => {
     };
 
     return (
-        <div className="container mt-5">
-      <h2 className="text-center mb-4">Contact List</h2>
+      <div className="container mt-5">
+      <h2 className="text-center">Contact List</h2>
       <button
-        className="btn btn-primary mb-3"
+        className="btn btn-dark mb-3 text-uppercase"
         onClick={() => {
           setIsFormVisible(true);
           setSelectedContact(null);
         }}
       >
-        Add Contact
+        Add a new Contact
       </button>
       {isFormVisible && (
         <ContactForm
@@ -106,7 +106,7 @@ const ContactList = () => {
       <div className="mb-3">
         <input
           type="text"
-          placeholder="Search by name or surname"
+          placeholder="Search by Name or Surname"
           value={searchTerm}
           onChange={handleSearchChange}
           className="form-control"
@@ -119,8 +119,8 @@ const ContactList = () => {
       ) : (
         <>
           <div className="row">
-            <div className="col-md-12">
-              <table className="table table-border">
+            <div className="col-md-12 table-responsive border-dark">
+              <table className="table table-bordered table-hover">
                 <thead>
                   <tr>
                     <th>Surname</th>
@@ -143,16 +143,20 @@ const ContactList = () => {
                       <td>{contact.email}</td>
                       <td>
                         <button
-                          className="btn btn-warning btn-sm"
+                          className="btn btn-outline-dark btn-sm me-1"
                           onClick={() => handleEdit(contact)}
+                          title="Edit"
+                          aria-label="Edit"
                         >
-                          Edit
+                          <i class="fa-solid fa-pen"></i>
                         </button>
                         <button
-                          className="btn btn-danger btn-sm"
+                          className="btn btn-outline-dark btn-sm me-1"
                           onClick={() => handleDelete(contact._id)}
+                          title="Delete"
+                          aria-label="Delete"
                         >
-                          Delete
+                          <i class="fa-solid fa-trash"></i>
                         </button>
                       </td>
                     </tr>
