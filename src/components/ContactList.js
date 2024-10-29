@@ -11,7 +11,7 @@ const ContactList = () => {
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const contactsPerPage = 10; // Adjust as needed
+  const contactsPerPage = 25; // Adjust as needed
 
   // Search state
   const [searchTerm, setSearchTerm] = useState('');
@@ -87,7 +87,7 @@ const ContactList = () => {
       <div className="container mt-5">
       <h2 className="text-center">Contact List</h2>
       <button
-        className="btn btn-dark mb-3 text-uppercase"
+        className="btn btn-dark btn-lg btn-block mb-3 text-uppercase"
         onClick={() => {
           setIsFormVisible(true);
           setSelectedContact(null);
