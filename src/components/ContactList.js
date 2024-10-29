@@ -22,6 +22,7 @@ const ContactList = () => {
     }, []);
 
     const handleEdit = (contact) => {
+        console.log('Editing Contact ID:', contact._id);
         setSelectedContact(contact);
         setIsFormVisible(true);
     };
@@ -77,7 +78,7 @@ const ContactList = () => {
                                     <td>{contact.mobile}</td>
                                     <td>{contact.email}</td>
                                     <td>
-                                        <button className="btn btn-warning btn-sm" onClick={() => handleEdit(contact)}>Edit Contact</button>
+                                        <button className="btn btn-warning btn-sm" onClick={() => handleEdit(contact)}>Edit</button>
                                         <button className="btn btn-danger btn-sm" onClick={() => handleDelete(contact._id)}>Delete</button>
                                     </td>
                                 </tr>
