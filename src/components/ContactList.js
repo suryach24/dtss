@@ -4,37 +4,75 @@ import ContactForm from './ContactForm';
 import './ContactList.css';
 
 const ContactList = () => {
-    const [contacts, setContacts] = useState([]);
-    const [selectedContact, setSelectedContact] = useState(null);
-    const [isFormVisible, setIsFormVisible] = useState(false);
+  const [contacts, setContacts] = useState([]);
+  const [selectedContact, setSelectedContact] = useState(null);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
-    useEffect(() => {
-        const fetchContacts = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/contacts');
-                setContacts(response.data);
-            } catch (error) {
-                console.error('Error fetching contacts:', error);
-            }
-        };
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const contactsPerPage = 10; // Adjust as needed
 
-        fetchContacts();
-    }, []);
+  // Search state
+  const [searchTerm, setSearchTerm] = useState('');
 
-    const handleEdit = (contact) => {
-        console.log('Editing Contact ID:', contact._id);
-        setSelectedContact(contact);
-        setIsFormVisible(true);
-    };
+  // Loading state
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleDelete = async (id) => {
-        try {
-            await axios.delete(`http://localhost:5000/api/contacts/${id}`);
-            setContacts(contacts.filter(contact => contact._id !== id));
-        } catch (error) {
-            console.error('Error deleting contact:', error);
-        }
-    };
+  // Fetch contacts with pagination
+  const fetchContacts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get('http://localhost:5000/api/contacts', {
+        params: {
+          page: currentPage,
+          limit: contactsPerPage,
+          search: searchTerm,
+        },
+      });
+      setContacts(response.data.contacts);
+      setTotalPages(response.data.totalPages);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching contacts:', error);
+      setIsLoading(false);
+    }
+  };
+
+  // Fetch contacts on component mount and when currentPage or searchTerm changes
+  useEffect(() => {
+    fetchContacts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, searchTerm]);
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1); // Reset to first page on new search
+  };
+
+  // Handle edit
+  const handleEdit = (contact) => {
+    setSelectedContact(contact);
+    setIsFormVisible(true);
+  };
+
+  // Handle delete
+  const handleDelete = async (contactId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/contacts/${contactId}`);
+      // After deleting, refetch contacts
+      fetchContacts();
+    } catch (error) {
+      console.error('Error deleting contact:', error);
+    }
+  };
 
     const handleContactSaved = (savedContact) => {
         if (selectedContact) {
@@ -47,48 +85,106 @@ const ContactList = () => {
 
     return (
         <div className="container mt-5">
-            <h2 className="text-center mb-4">Contact List</h2>
-            <button className="btn btn-primary mb-3" onClick={() => { setIsFormVisible(true); setSelectedContact(null); }}>
-                Add Contact
-            </button>
-            {isFormVisible && (
-                <ContactForm contactId={selectedContact?._id} onContactSaved={handleContactSaved} onCancel={() => setIsFormVisible(false)} />
-            )}
-            <div className="row">
-                <div className="col-md-8">
-                    <table className="table table-border">
-                        <thead>
-                            <tr>
-                                <th>Surname</th>
-                                <th>Name</th>
-                                <th>Area</th>
-                                <th>Address</th>
-                                <th>Mobile</th>
-                                <th>Email</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {contacts.map(contact => (
-                                <tr key={contact._id}>
-                                    <td>{contact.surname}</td>
-                                    <td>{contact.name}</td>
-                                    <td>{contact.area}</td>
-                                    <td>{contact.address}</td>
-                                    <td>{contact.mobile}</td>
-                                    <td>{contact.email}</td>
-                                    <td>
-                                        <button className="btn btn-warning btn-sm" onClick={() => handleEdit(contact)}>Edit</button>
-                                        <button className="btn btn-danger btn-sm" onClick={() => handleDelete(contact._id)}>Delete</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+      <h2 className="text-center mb-4">Contact List</h2>
+      <button
+        className="btn btn-primary mb-3"
+        onClick={() => {
+          setIsFormVisible(true);
+          setSelectedContact(null);
+        }}
+      >
+        Add Contact
+      </button>
+      {isFormVisible && (
+        <ContactForm
+          contactId={selectedContact?._id}
+          onContactSaved={handleContactSaved}
+          onCancel={() => setIsFormVisible(false)}
+        />
+      )}
+      {/* Search Input */}
+      <div className="mb-3">
+        <input
+          type="text"
+          placeholder="Search by name or surname"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="form-control"
+        />
+      </div>
+      {isLoading ? (
+        <div className="text-center">Loading...</div>
+      ) : contacts.length === 0 ? (
+        <div className="text-center">No contacts found.</div>
+      ) : (
+        <>
+          <div className="row">
+            <div className="col-md-12">
+              <table className="table table-border">
+                <thead>
+                  <tr>
+                    <th>Surname</th>
+                    <th>Name</th>
+                    <th>Area</th>
+                    <th>Address</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {contacts.map((contact) => (
+                    <tr key={contact._id}>
+                      <td>{contact.surname}</td>
+                      <td>{contact.name}</td>
+                      <td>{contact.area}</td>
+                      <td>{contact.address}</td>
+                      <td>{contact.mobile}</td>
+                      <td>{contact.email}</td>
+                      <td>
+                        <button
+                          className="btn btn-warning btn-sm"
+                          onClick={() => handleEdit(contact)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleDelete(contact._id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {/* Pagination Controls */}
+              <div className="d-flex justify-content-between">
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+                <span>
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </div>
             </div>
-        </div>
-    );
+          </div>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default ContactList;

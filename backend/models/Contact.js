@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const contactSchema = new mongoose.Schema(
   {
-    surname: { type: String, required: true },
-    name: { type: String, required: true },
+    surname: { type: String, required: true, index: true},
+    name: { type: String, required: true, index: true},
     area: { type: String, required: true },
     address: { type: String, required: true },
     mobile: {

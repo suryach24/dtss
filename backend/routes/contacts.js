@@ -68,14 +68,39 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Get all contacts
 router.get('/', async (req, res) => {
     try {
-        const contacts = await Contact.find();
-        res.send(contacts);
+      const { page = 1, limit = 10, search = '' } = req.query;
+  
+      // Convert page and limit to integers
+      const pageInt = parseInt(page);
+      const limitInt = parseInt(limit);
+  
+      // Build the query object for search functionality
+      const query = {};
+      if (search) {
+        // Assuming you want to search by name and surname
+        query.$or = [
+          { name: { $regex: search, $options: 'i' } },
+          { surname: { $regex: search, $options: 'i' } },
+        ];
+      }
+  
+      const contacts = await Contact.find(query)
+        .skip((pageInt - 1) * limitInt)
+        .limit(limitInt);
+  
+      // Get total count for pagination
+      const total = await Contact.countDocuments(query);
+  
+      res.send({
+        contacts,
+        totalPages: Math.ceil(total / limitInt),
+        currentPage: pageInt,
+      });
     } catch (error) {
-        res.status(500).send({ message: 'Server error' });
+      res.status(500).send({ message: 'Server error' });
     }
-});
+  });
 
 module.exports = router;
