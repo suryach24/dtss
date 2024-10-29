@@ -93,50 +93,77 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
   };
 
   return (
-    <div className="card mb-3">
+<div className="card mb-3">
       <div className="card-header">{contactId ? 'Edit Contact' : 'Add Contact'}</div>
       <div className="card-body">
         {errors.form && <div className="alert alert-danger">{errors.form}</div>}
         <form onSubmit={handleSubmit}>
-          {/* Surname */}
-          <div className="form-group">
-            <label>Surname</label>
-            <input
-              type="text"
-              name="surname"
-              value={contact.surname}
-              onChange={handleChange}
-              className={`form-control ${errors.surname ? 'is-invalid' : ''}`}
-            />
-            {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
+          {/* Row 1: Surname and Name */}
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label>Please enter the Surname</label>
+              <input
+                type="text"
+                name="surname"
+                value={contact.surname}
+                onChange={handleChange}
+                className={`form-control ${errors.surname ? 'is-invalid' : ''}`}
+              />
+              {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
+            </div>
+            <div className="form-group col-md-6">
+              <label>Enter your First and Last names</label>
+              <input
+                type="text"
+                name="name"
+                value={contact.name}
+                onChange={handleChange}
+                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+              />
+              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+            </div>
           </div>
-          {/* Name */}
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              value={contact.name}
-              onChange={handleChange}
-              className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-            />
-            {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+
+          {/* Row 2: Area, Mobile, Phone */}
+          <div className="form-row">
+            <div className="form-group col-md-4">
+              <label>Area/Colony</label>
+              <input
+                type="text"
+                name="area"
+                value={contact.area}
+                onChange={handleChange}
+                className={`form-control ${errors.area ? 'is-invalid' : ''}`}
+              />
+              {errors.area && <div className="invalid-feedback">{errors.area}</div>}
+            </div>
+            <div className="form-group col-md-4">
+              <label>Primary Contact Number</label>
+              <input
+                type="text"
+                name="mobile"
+                value={contact.mobile}
+                onChange={handleChange}
+                className={`form-control ${errors.mobile ? 'is-invalid' : ''}`}
+              />
+              {errors.mobile && <div className="invalid-feedback">{errors.mobile}</div>}
+            </div>
+            <div className="form-group col-md-4">
+              <label>Secondary Contact</label>
+              <input
+                type="text"
+                name="phone"
+                value={contact.phone}
+                onChange={handleChange}
+                className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
+              />
+              {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
+            </div>
           </div>
-          {/* Area */}
+
+          {/* Row 3: Address */}
           <div className="form-group">
-            <label>Area</label>
-            <input
-              type="text"
-              name="area"
-              value={contact.area}
-              onChange={handleChange}
-              className={`form-control ${errors.area ? 'is-invalid' : ''}`}
-            />
-            {errors.area && <div className="invalid-feedback">{errors.area}</div>}
-          </div>
-          {/* Address */}
-          <div className="form-group">
-            <label>Address</label>
+            <label>Enter your full Address</label>
             <input
               type="text"
               name="address"
@@ -146,54 +173,33 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
             />
             {errors.address && <div className="invalid-feedback">{errors.address}</div>}
           </div>
-          {/* Mobile */}
-          <div className="form-group">
-            <label>Mobile</label>
-            <input
-              type="text"
-              name="mobile"
-              value={contact.mobile}
-              onChange={handleChange}
-              className={`form-control ${errors.mobile ? 'is-invalid' : ''}`}
-            />
-            {errors.mobile && <div className="invalid-feedback">{errors.mobile}</div>}
+
+          {/* Row 4: Email and Organisation */}
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label>Please enter your full email</label>
+              <input
+                type="email"
+                name="email"
+                value={contact.email}
+                onChange={handleChange}
+                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+              />
+              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+            </div>
+            <div className="form-group col-md-6">
+              <label>Company/Organisation</label>
+              <input
+                type="text"
+                name="organisation"
+                value={contact.organisation}
+                onChange={handleChange}
+                className={`form-control ${errors.organisation ? 'is-invalid' : ''}`}
+              />
+              {errors.organisation && <div className="invalid-feedback">{errors.organisation}</div>}
+            </div>
           </div>
-          {/* Email */}
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={contact.email}
-              onChange={handleChange}
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            />
-            {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-          </div>
-          {/* Phone */}
-          <div className="form-group">
-            <label>Phone</label>
-            <input
-              type="text"
-              name="phone"
-              value={contact.phone}
-              onChange={handleChange}
-              className={`form-control ${errors.phone ? 'is-invalid' : ''}`}
-            />
-            {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
-          </div>
-          {/* Organisation */}
-          <div className="form-group">
-            <label>Organisation</label>
-            <input
-              type="text"
-              name="organisation"
-              value={contact.organisation}
-              onChange={handleChange}
-              className={`form-control ${errors.organisation ? 'is-invalid' : ''}`}
-            />
-            {errors.organisation && <div className="invalid-feedback">{errors.organisation}</div>}
-          </div>
+
           {/* Buttons */}
           <button type="submit" className="btn btn-dark">
             {contactId ? 'Update Contact' : 'Add Contact'}
