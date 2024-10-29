@@ -55,7 +55,7 @@ const ContactList = () => {
             )}
             <div className="row">
                 <div className="col-md-8">
-                    <table className="table table-bordered">
+                    <table className="table table-border">
                         <thead>
                             <tr>
                                 <th>Surname</th>

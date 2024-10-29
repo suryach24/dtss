@@ -9,7 +9,11 @@ router.post('/', async (req, res) => {
         await contact.save();
         res.status(201).send(contact);
     } catch (error) {
-        res.status(400).send(error);
+        if (error.name === 'ValidationError') {
+            res.status(400).send(error);
+        } else {
+            res.status(500).send({ message: 'Server error' });
+        }
     }
 });
 
@@ -19,30 +23,41 @@ router.get('/', async (req, res) => {
         const contacts = await Contact.find();
         res.send(contacts);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send({ message: 'Server error' });
     }
 });
 
 // Update a contact
 router.put('/:id', async (req, res) => {
     try {
-        const contact = await Contact.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const contact = await Contact.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        );
         if (!contact) {
             return res.status(404).send({ message: 'Contact not found' });
         }
         res.send(contact);
     } catch (error) {
-        res.status(500).send(error);
+        if (error.name === 'ValidationError') {
+            res.status(400).send(error);
+        } else {
+            res.status(500).send({ message: 'Server error' });
+        }
     }
 });
 
 // Delete a contact
 router.delete('/:id', async (req, res) => {
     try {
-        await Contact.findByIdAndDelete(req.params.id);
+        const contact = await Contact.findByIdAndDelete(req.params.id);
+        if (!contact) {
+            return res.status(404).send({ message: 'Contact not found' });
+        }
         res.send({ message: 'Contact deleted' });
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send({ message: 'Server error' });
     }
 });
 

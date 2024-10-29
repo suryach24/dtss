@@ -40,7 +40,7 @@ const ContactList = () => {
                 {isFormVisible && (
                     <ContactForm contactId={selectedContactId} onContactSaved={handleContactSaved} onCancel={() => setIsFormVisible(false)} />
                 )}
-                <table className="table table-striped">
+                <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>Surname</th>
