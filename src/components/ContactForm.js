@@ -120,24 +120,26 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
           {/* Row 1: Surname and Name */}
           <div className="form-row">
             <div className="form-group col-md-4">
-              <label>Please enter your Surname</label>
+              <label>Surname</label>
               <input
                 type="text"
                 name="surname"
                 value={contact.surname}
                 onChange={handleChange}
                 className={`form-control ${errors.surname ? 'is-invalid' : ''}`}
+                placeholder="Enter your surname"
               />
               {errors.surname && <div className="invalid-feedback">{errors.surname}</div>}
             </div>
             <div className="form-group col-md-8">
-              <label>Enter your remaining Name</label>
+              <label>Name</label>
               <input
                 type="text"
                 name="name"
                 value={contact.name}
                 onChange={handleChange}
                 className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                placeholder="Enter remaining name"
               />
               {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
@@ -153,6 +155,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
                 value={contact.area}
                 onChange={handleChange}
                 className={`form-control ${errors.area ? 'is-invalid' : ''}`}
+                placeholder="Enter your locality or area"
               />
               {errors.area && <div className="invalid-feedback">{errors.area}</div>}
             </div>
@@ -164,6 +167,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
                 value={contact.mobile}
                 onChange={handleChange}
                 className={`form-control ${errors.mobile ? 'is-invalid' : ''}`}
+                placeholder="Enter your primary contact number"
               />
               {errors.mobile && <div className="invalid-feedback">{errors.mobile}</div>}
             </div>
@@ -183,13 +187,14 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
 
           {/* Row 3: Address */}
           <div className="form-group">
-            <label>Enter your Full Address</label>
+            <label>Address</label>
             <input
               type="text"
               name="address"
               value={contact.address}
               onChange={handleChange}
               className={`form-control ${errors.address ? 'is-invalid' : ''}`}
+              placeholder="Enter your full address here"
             />
             {errors.address && <div className="invalid-feedback">{errors.address}</div>}
           </div>
@@ -204,7 +209,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
                 value={contact.email}
                 onChange={handleChange}
                 className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                placeholder="Enter email (optional)"
+                placeholder="Enter your email address"
               />
               {errors.email && <div className="invalid-feedback">{errors.email}</div>}
             </div>
@@ -216,7 +221,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
                 value={contact.organisation}
                 onChange={handleChange}
                 className="form-control"
-                placeholder="Enter organisation (optional)"
+                placeholder="Enter your organisation or Company. If retired, type retired"
               />
             </div>
           </div>
