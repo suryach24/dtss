@@ -3,6 +3,8 @@ import axios from 'axios';
 import ContactForm from './ContactForm';
 import './ContactList.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
   const [selectedContact, setSelectedContact] = useState(null);
@@ -23,7 +25,7 @@ const ContactList = () => {
   const fetchContacts = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('http://localhost:5000/api/contacts', {
+      const response = await axios.get('${API_BASE_URL}/contacts', {
         params: {
           page: currentPage,
           limit: contactsPerPage,
@@ -66,7 +68,7 @@ const ContactList = () => {
   // Handle delete
   const handleDelete = async (contactId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/contacts/${contactId}`);
+      await axios.delete(`${API_BASE_URL}/contacts/${contactId}`);
       // After deleting, refetch contacts
       fetchContacts();
     } catch (error) {

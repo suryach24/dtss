@@ -3,10 +3,11 @@ import './App.css';
 import logo from './logo.svg';
 import ContactList from './components/ContactList';
 import Footer from './components/Footer.js';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
     return (
-        <>
+    <BrowserRouter basename="/dtss-addresses">
       <header className="bg-light py-1">
         <div className="container text-center">
           <h1 className="display-4"
@@ -23,7 +24,7 @@ function App() {
         <ContactList />
       </div>
       < Footer />
-    </>
+    </BrowserRouter>
     );
 }
 

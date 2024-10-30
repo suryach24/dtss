@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
   console.log('ContactForm received contactId:', contactId);
   // State to hold form data
@@ -27,7 +29,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
       const fetchContact = async () => {
         try {
           console.log('Fetching contact with ID:', contactId);
-          const response = await axios.get(`http://localhost:5000/api/contacts/${contactId}`);
+          const response = await axios.get(`${API_BASE_URL}/contacts/${contactId}`);
           console.log('Contact data fetched:', response.data);
           setContact(response.data);
         } catch (error) {
@@ -95,10 +97,10 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
       let response;
       if (contactId) {
         // Update existing contact
-        response = await axios.put(`http://localhost:5000/api/contacts/${contactId}`, contact);
+        response = await axios.put(`${API_BASE_URL}/contacts/${contactId}`, contact);
       } else {
         // Create new contact
-        response = await axios.post('http://localhost:5000/api/contacts', contact);
+        response = await axios.post('${API_BASE_URL}/contacts', contact);
       }
       // Inform parent component about the saved contact
       onContactSaved(response.data);
