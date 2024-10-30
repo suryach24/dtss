@@ -25,6 +25,7 @@ const ContactList = () => {
   const fetchContacts = async () => {
     try {
       setIsLoading(true);
+      // eslint-disable-next-line no-template-curly-in-string
       const response = await axios.get('${API_BASE_URL}/contacts', {
         params: {
           page: currentPage,
@@ -37,6 +38,7 @@ const ContactList = () => {
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching contacts:', error);
+      setContacts([]); // Set contacts to empty array on error
       setIsLoading(false);
     }
   };

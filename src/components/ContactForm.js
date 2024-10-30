@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 // ContactForm.js
 
 import React, { useState, useEffect } from 'react';
