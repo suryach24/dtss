@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import logo from './logo.svg';
 import ContactList from './components/ContactList';
+import Footer from './components/Footer.js';
 
 function App() {
     return (
@@ -15,13 +16,13 @@ function App() {
             fontSize: '3.5rem',
             marginBottom: '2rem', }}>
           <img src={logo} alt="DTSS Hyderabad Logo" width="150" className="img-fluid mr-5" />
-                Devathilakula Sankshema Sangham</h1>
-          <p className="lead">A central repository of all contact information for/by the Community</p>
+                Devathilakula Sankshema Sangham Address Book</h1>
         </div>
       </header>
       <div className="container mt-5">
         <ContactList />
       </div>
+      < Footer />
     </>
     );
 }
