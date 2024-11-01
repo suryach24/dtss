@@ -25,8 +25,7 @@ const ContactList = () => {
   const fetchContacts = async () => {
     try {
       setIsLoading(true);
-      // eslint-disable-next-line no-template-curly-in-string
-      const response = await axios.get('${API_BASE_URL}/contacts', {
+      const response = await axios.get(`${API_BASE_URL}/contacts`, {
         params: {
           page: currentPage,
           limit: contactsPerPage,

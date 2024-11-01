@@ -101,7 +101,7 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
         response = await axios.put(`${API_BASE_URL}/contacts/${contactId}`, contact);
       } else {
         // Create new contact
-        response = await axios.post('${API_BASE_URL}/contacts', contact);
+        response = await axios.post(`${API_BASE_URL}/contacts`, contact);
       }
       // Inform parent component about the saved contact
       onContactSaved(response.data);
