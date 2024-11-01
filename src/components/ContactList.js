@@ -33,6 +33,7 @@ const ContactList = () => {
           search: searchTerm,
         },
       });
+      console.log('Contacts fetched:', response.data);
       setContacts(response.data.contacts);
       setTotalPages(response.data.totalPages);
       setIsLoading(false);

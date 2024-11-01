@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/dtss-addresses/static/css/main.05eb7470.css",
-    "main.js": "/dtss-addresses/static/js/main.0ed7bd68.js",
+    "main.js": "/dtss-addresses/static/js/main.558baf24.js",
     "static/js/453.8ab44547.chunk.js": "/dtss-addresses/static/js/453.8ab44547.chunk.js",
     "static/media/logo.svg": "/dtss-addresses/static/media/logo.ded257e183d11c1163d5d8adc628f163.svg",
     "static/media/fa-solid-900.ttf": "/dtss-addresses/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
@@ -14,11 +14,11 @@
     "static/media/fa-v4compatibility.woff2": "/dtss-addresses/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
     "index.html": "/dtss-addresses/index.html",
     "main.05eb7470.css.map": "/dtss-addresses/static/css/main.05eb7470.css.map",
-    "main.0ed7bd68.js.map": "/dtss-addresses/static/js/main.0ed7bd68.js.map",
+    "main.558baf24.js.map": "/dtss-addresses/static/js/main.558baf24.js.map",
     "453.8ab44547.chunk.js.map": "/dtss-addresses/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.05eb7470.css",
-    "static/js/main.0ed7bd68.js"
+    "static/js/main.558baf24.js"
   ]
 }
