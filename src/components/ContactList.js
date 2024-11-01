@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ContactForm from './ContactForm';
 import './ContactList.css';
+import { Modal, Button } from 'react-bootstrap';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -14,6 +15,10 @@ const ContactList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const contactsPerPage = 25; // Adjust as needed
+
+  // State variables for the confirmation modal
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [contactToDelete, setContactToDelete] = useState(null);  
 
   // Search state
   const [searchTerm, setSearchTerm] = useState('');
@@ -67,14 +72,23 @@ const ContactList = () => {
     setIsFormVisible(true);
   };
 
+  const handleDeleteClick = (contact) => {
+    setContactToDelete(contact);
+    setShowDeleteModal(true);
+  };
+
   // Handle delete
-  const handleDelete = async (contactId) => {
+  const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`${API_BASE_URL}/contacts/${contactId}`);
-      // After deleting, refetch contacts
-      fetchContacts();
+      await axios.delete(`${API_BASE_URL}/contacts/${contactToDelete._id}`);
+      // Remove the deleted contact from the state
+      setContacts(contacts.filter((c) => c._id !== contactToDelete._id));
+      // Close the modal and reset the state
+      setShowDeleteModal(false);
+      setContactToDelete(null);
     } catch (error) {
       console.error('Error deleting contact:', error);
+      // Optionally display an error message to the user
     }
   };
 
@@ -86,6 +100,27 @@ const ContactList = () => {
         }
         setIsFormVisible(false);
     };
+
+    <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Confirm Deletion</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Are you sure you want to delete{' '}
+        <strong>
+          {contactToDelete && `${contactToDelete.firstName} ${contactToDelete.lastName}`}
+        </strong>
+        ?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={handleConfirmDelete}>
+          Delete
+        </Button>
+      </Modal.Footer>
+    </Modal>
 
     return (
       <div className="container mt-5">
@@ -157,7 +192,7 @@ const ContactList = () => {
                         </button>
                         <button
                           className="btn btn-outline-dark btn-sm"
-                          onClick={() => handleDelete(contact._id)}
+                          onClick={() => handleDeleteClick(contact)}
                           title="Delete"
                           aria-label="Delete"
                         >
