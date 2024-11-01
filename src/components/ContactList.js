@@ -18,7 +18,7 @@ const ContactList = () => {
 
   // State variables for the confirmation modal
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [contactToDelete, setContactToDelete] = useState(null);  
+  const [contactToDelete, setContactToDelete] = useState(null);
 
   // Search state
   const [searchTerm, setSearchTerm] = useState('');
@@ -92,38 +92,21 @@ const ContactList = () => {
     }
   };
 
-    const handleContactSaved = (savedContact) => {
-        if (selectedContact) {
-            setContacts(contacts.map(contact => contact._id === savedContact._id ? savedContact : contact));
-        } else {
-            setContacts([...contacts, savedContact]);
-        }
-        setIsFormVisible(false);
-    };
+  const handleContactSaved = (savedContact) => {
+    if (selectedContact) {
+      setContacts(
+        contacts.map((contact) =>
+          contact._id === savedContact._id ? savedContact : contact
+        )
+      );
+    } else {
+      setContacts([...contacts, savedContact]);
+    }
+    setIsFormVisible(false);
+  };
 
-    <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-      <Modal.Header closeButton>
-        <Modal.Title>Confirm Deletion</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        Are you sure you want to delete{' '}
-        <strong>
-          {contactToDelete && `${contactToDelete.firstName} ${contactToDelete.lastName}`}
-        </strong>
-        ?
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
-          Cancel
-        </Button>
-        <Button variant="danger" onClick={handleConfirmDelete}>
-          Delete
-        </Button>
-      </Modal.Footer>
-    </Modal>
-
-    return (
-      <div className="container mt-5">
+  return (
+    <div className="container mt-5">
       <h2 className="text-center">Contact List</h2>
       <button
         className="btn btn-dark btn-lg btn-block mb-3 text-uppercase"
@@ -182,22 +165,22 @@ const ContactList = () => {
                       <td>{contact.email}</td>
                       <td>
                         <div className="d-flex align-items-center">
-                        <button
-                          className="btn btn-outline-dark btn-sm"
-                          onClick={() => handleEdit(contact)}
-                          title="Edit"
-                          aria-label="Edit"
-                        >
-                          <i className="fa-solid fa-pen"></i>
-                        </button>
-                        <button
-                          className="btn btn-outline-dark btn-sm"
-                          onClick={() => handleDeleteClick(contact)}
-                          title="Delete"
-                          aria-label="Delete"
-                        >
-                          <i className="fa-solid fa-trash"></i>
-                        </button>
+                          <button
+                            className="btn btn-outline-dark btn-sm"
+                            onClick={() => handleEdit(contact)}
+                            title="Edit"
+                            aria-label="Edit"
+                          >
+                            <i className="fa-solid fa-pen"></i>
+                          </button>
+                          <button
+                            className="btn btn-outline-dark btn-sm"
+                            onClick={() => handleDeleteClick(contact)}
+                            title="Delete"
+                            aria-label="Delete"
+                          >
+                            <i className="fa-solid fa-trash"></i>
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -228,6 +211,32 @@ const ContactList = () => {
           </div>
         </>
       )}
+
+      {/* Confirmation Modal */}
+      <Modal 
+        show={showDeleteModal} 
+        onHide={() => setShowDeleteModal(false)}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete the contact details of {' '}
+          <strong>
+            {contactToDelete && `${contactToDelete.surname} ${contactToDelete.name}`}
+          </strong>
+          ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete Contact
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
