@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './ContactForm.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -78,8 +79,6 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
       }
     }
 
-    // No validation for organisation as it's optional and has no specific format
-
     return newErrors;
   };
 
@@ -115,15 +114,15 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
   };
 
   return (
-    <div className="card mb-3">
-      <div className="card-header">{contactId ? 'Edit Contact' : 'Add Contact'}</div>
+    <div className="card mb-3 ">
+      <div className="card-header"><strong>{contactId ? 'Edit Contact' : 'Add Contact'}</strong></div>
       <div className="card-body">
         {errors.form && <div className="alert alert-danger">{errors.form}</div>}
         <form onSubmit={handleSubmit}>
           {/* Row 1: Surname and Name */}
           <div className="form-row">
             <div className="form-group col-md-4">
-              <label>Surname</label>
+              <label className=''>Surname</label>
               <input
                 type="text"
                 name="surname"

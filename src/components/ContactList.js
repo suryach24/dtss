@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import axios from 'axios';
 import ContactForm from './ContactForm';
 import './ContactList.css';
@@ -10,6 +10,8 @@ const ContactList = () => {
   const [contacts, setContacts] = useState([]);
   const [selectedContact, setSelectedContact] = useState(null);
   const [isFormVisible, setIsFormVisible] = useState(false);
+
+  const contactFormRef = useRef(null);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -70,6 +72,12 @@ const ContactList = () => {
   const handleEdit = (contact) => {
     setSelectedContact(contact);
     setIsFormVisible(true);
+      // Scroll to the ContactForm
+    setTimeout(() => {
+      if (contactFormRef.current) {
+        contactFormRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 0);
   };
 
   const handleDeleteClick = (contact) => {
@@ -118,11 +126,13 @@ const ContactList = () => {
         Add a new Contact
       </button>
       {isFormVisible && (
-        <ContactForm
-          contactId={selectedContact?._id}
-          onContactSaved={handleContactSaved}
-          onCancel={() => setIsFormVisible(false)}
-        />
+        <div ref={contactFormRef}>
+          <ContactForm
+            contactId={selectedContact?._id}
+            onContactSaved={handleContactSaved}
+            onCancel={() => setIsFormVisible(false)}
+          />
+        </div>
       )}
       {/* Search Input */}
       <div className="mb-3">
