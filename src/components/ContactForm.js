@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ContactForm.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -114,8 +113,8 @@ const ContactForm = ({ contactId, onContactSaved, onCancel }) => {
   };
 
   return (
-    <div className="card mb-3 ">
-      <div className="card-header"><strong>{contactId ? 'Edit Contact' : 'Add Contact'}</strong></div>
+    <div className="card contact-form-container mb-3 ">
+      <div className="card-header text-center bg-dark text-white"><strong>{contactId ? 'Edit Contact' : 'Add Contact'}</strong></div>
       <div className="card-body">
         {errors.form && <div className="alert alert-danger">{errors.form}</div>}
         <form onSubmit={handleSubmit}>

@@ -4,11 +4,12 @@ import logo from './logo.svg';
 import ContactList from './components/ContactList';
 import Footer from './components/Footer.js';
 import { BrowserRouter } from 'react-router-dom';
+import './styles.css';
 
 function App() {
     return (
     <BrowserRouter basename="/dtss-addresses">
-      <header className="bg-light py-1">
+      <header className="bg-light">
         <div className="container text-center">
           <h1 className="display-4"
           style={{ 

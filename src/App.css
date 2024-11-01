@@ -7,8 +7,8 @@ body {
 }
 
 .table th {
-  background-color: #464646;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(255, 255, 255);
 }
 
 .table-striped tbody tr:nth-of-type(odd) {

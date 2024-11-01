@@ -2,19 +2,18 @@
 
 import React from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
-import './Footer.css'; // Ensure you have the appropriate CSS
 import logo from './logo.svg';
 
 function Footer() {
   return (
-    <footer className="footer bg-light py-1 mt-3">
+    <footer className="footer bg-light mt-3">
       <div className="container">
         <div className="row">
           {/* Left Column: Address and Map */}
           <div className="col-md-3">
           <img src={logo} alt="DTSS Hyderabad Logo" width="100" className="ml-5 pl-4 img-fluid"  />
             {/* Address */}
-            <h6 className='py-2 '>Hyderabad Choultry Address</h6>
+            <h6 className='py-2 '><strong>Hyderabad Choultry Address</strong></h6>
             <p className="mb-1">Devathilakula Visranthi Bhavanam</p>
             <p className="mb-1">Vanka Anantha Nilayam</p>
             <p className="mb-1">Gangaram, Chanda Nagar</p>

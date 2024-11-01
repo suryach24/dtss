@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef  } from 'react';
 import axios from 'axios';
 import ContactForm from './ContactForm';
-import './ContactList.css';
 import { Modal, Button } from 'react-bootstrap';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -114,7 +113,7 @@ const ContactList = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container contact-list-container">
       <h2 className="text-center">Contact List</h2>
       <button
         className="btn btn-dark btn-lg btn-block mb-3 text-uppercase"
