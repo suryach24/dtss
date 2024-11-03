@@ -113,139 +113,141 @@ const ContactList = () => {
   };
 
   return (
-    <div className="container contact-list-container">
-      <h2 className="text-center">Contact List</h2>
-      <button
-        className="btn btn-dark btn-lg btn-block mb-3 text-uppercase"
-        onClick={() => {
-          setIsFormVisible(true);
-          setSelectedContact(null);
-        }}
-      >
-        Add a new Contact
-      </button>
-      {isFormVisible && (
-        <div ref={contactFormRef}>
-          <ContactForm
-            contactId={selectedContact?._id}
-            onContactSaved={handleContactSaved}
-            onCancel={() => setIsFormVisible(false)}
+    <div className="container-fluid contact-list-container">
+      <div className="contact-list-content">
+        <h2 className="text-center">Contact List</h2>
+        <button
+          className="btn btn-dark btn-lg btn-block mb-3 text-uppercase"
+          onClick={() => {
+            setIsFormVisible(true);
+            setSelectedContact(null);
+          }}
+        >
+          Add a new Contact
+        </button>
+        {isFormVisible && (
+          <div ref={contactFormRef}>
+            <ContactForm
+              contactId={selectedContact?._id}
+              onContactSaved={handleContactSaved}
+              onCancel={() => setIsFormVisible(false)}
+            />
+          </div>
+        )}
+        {/* Search Input */}
+        <div className="mb-3">
+          <input
+            type="text"
+            placeholder="Search by Name or Surname"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="form-control"
           />
         </div>
-      )}
-      {/* Search Input */}
-      <div className="mb-3">
-        <input
-          type="text"
-          placeholder="Search by Name or Surname"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="form-control"
-        />
-      </div>
-      {isLoading ? (
-        <div className="text-center">Loading...</div>
-      ) : contacts.length === 0 ? (
-        <div className="text-center">No contacts found.</div>
-      ) : (
-        <>
-          <div className="row">
-            <div className="col-md-12 table-responsive border-dark">
-              <table className="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>Surname</th>
-                    <th>Name</th>
-                    <th>Area</th>
-                    <th>Address</th>
-                    <th>Mobile</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {contacts.map((contact) => (
-                    <tr key={contact._id}>
-                      <td>{contact.surname}</td>
-                      <td>{contact.name}</td>
-                      <td>{contact.area}</td>
-                      <td>{contact.address}</td>
-                      <td>{contact.mobile}</td>
-                      <td>{contact.email}</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <button
-                            className="btn btn-outline-dark btn-sm"
-                            onClick={() => handleEdit(contact)}
-                            title="Edit"
-                            aria-label="Edit"
-                          >
-                            <i className="fa-solid fa-pen"></i>
-                          </button>
-                          <button
-                            className="btn btn-outline-dark btn-sm"
-                            onClick={() => handleDeleteClick(contact)}
-                            title="Delete"
-                            aria-label="Delete"
-                          >
-                            <i className="fa-solid fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
+        {isLoading ? (
+          <div className="text-center">Loading...</div>
+        ) : contacts.length === 0 ? (
+          <div className="text-center">No contacts found.</div>
+        ) : (
+          <>
+            <div className="row">
+              <div className="col-md-12 table-responsive border-dark">
+                <table className="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Surname</th>
+                      <th>Name</th>
+                      <th>Area</th>
+                      <th>Address</th>
+                      <th>Mobile</th>
+                      <th>Email</th>
+                      <th>Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-              {/* Pagination Controls */}
-              <div className="d-flex justify-content-between">
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-                <span>
-                  Page {currentPage} of {totalPages}
-                </span>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
+                  </thead>
+                  <tbody>
+                    {contacts.map((contact) => (
+                      <tr key={contact._id}>
+                        <td>{contact.surname}</td>
+                        <td>{contact.name}</td>
+                        <td>{contact.area}</td>
+                        <td>{contact.address}</td>
+                        <td>{contact.mobile}</td>
+                        <td>{contact.email}</td>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            <button
+                              className="btn btn-outline-dark btn-sm"
+                              onClick={() => handleEdit(contact)}
+                              title="Edit"
+                              aria-label="Edit"
+                            >
+                              <i className="fa-solid fa-pen"></i>
+                            </button>
+                            <button
+                              className="btn btn-outline-dark btn-sm"
+                              onClick={() => handleDeleteClick(contact)}
+                              title="Delete"
+                              aria-label="Delete"
+                            >
+                              <i className="fa-solid fa-trash"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {/* Pagination Controls */}
+                <div className="d-flex justify-content-between">
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                  >
+                    Previous
+                  </button>
+                  <span>
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
-
-      {/* Confirmation Modal */}
-      <Modal 
-        show={showDeleteModal} 
-        onHide={() => setShowDeleteModal(false)}
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Deletion</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete the contact details of {' '}
-          <strong>
-            {contactToDelete && `${contactToDelete.surname} ${contactToDelete.name}`}
-          </strong>
-          ?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={handleConfirmDelete}>
-            Delete Contact
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </>
+        )}
+  
+        {/* Confirmation Modal */}
+        <Modal 
+          show={showDeleteModal} 
+          onHide={() => setShowDeleteModal(false)}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Deletion</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to delete the contact details of {' '}
+            <strong>
+              {contactToDelete && `${contactToDelete.surname} ${contactToDelete.name}`}
+            </strong>
+            ?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={handleConfirmDelete}>
+              Delete Contact
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     </div>
   );
 };
